@@ -32,7 +32,6 @@ get '/restaurants' do
 end
 
 get '/restaurants/new' do
-
   erb :new
 end
 
@@ -46,4 +45,21 @@ get '/restaurants/:id' do
   end
 
   erb :show
+end
+
+post '/restaurants' do
+  id = make_restaurant_array.length + 1
+
+  CSV.open('restaurants.csv', 'a') do |csv|
+    csv << [
+      id,
+      params["name"],
+      params["address"],
+      params["description"],
+      params["url"],
+      params["image"],
+    ]
+  end
+
+  redirect to "/restaurants/#{id}"
 end
