@@ -27,9 +27,13 @@ get '/' do
 end
 
 get '/restaurants' do
-  binding.pry
   @restaurants = make_restaurant_array
   erb :index
+end
+
+get '/restaurants/new' do
+
+  erb :new
 end
 
 get '/restaurants/:id' do
